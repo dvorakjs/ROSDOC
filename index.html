@@ -2,7 +2,19 @@
 Version: ROS2
 Tutorials: https://docs.ros.org/en/iron/Tutorials.html
 
-
+2024년 01월 16일 
+----rqt_console-----
+1. 기능: 로그 메세지 확인하는 GUI 툴
+2. 실행: ros2 run rqt_console rqt_console
+3. Logger levels(우선순위에 대한 내림차순)
+   Fatal
+   Error
+   Warn
+   Info: default, default 셋팅 교체 가능
+   Debug 
+4. Default logger level 변경
+   ros2 run turtlesim turtlesim_node --ros-args --log-level WARN
+ 
 
 
 
