@@ -8,7 +8,7 @@
          -https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html
          -source /opt/ros/foxy/setup.bash
          -echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
-            source 명령어는 스크립트 파일일 수정한 수에 수정된 값을 바로 적용하기 위해 사용
+            source 명령어는 스크립트 파일 수정 후에 수정된 값을 바로 적용하기 위해 사용
             ~/bashrc 파일은 유저가 로그인할 때마다 읽어들이는 파일
 
       *Domain ID
@@ -39,6 +39,11 @@
          -turtle1 노드의 turtle1/cmd_vel 토픽에 turtle2의 turtle2/cmd_vel 할당
          -turtle_teleop_key 명령어 윈도우에서 turtle2 제어 가능
          -ros2 run turtlesim turtle_teleop_key --ros-args --remap turtle1/cmd_vel:=turtle2/cmd_vel
-
+   
+   2024-01-17
+      *Recording and playing backdata
+       -ros2 bag record -o <폴더명> <토픽명> <토픽명> ...
+       -폴더명에 해당하는 폴더가 생성되고 폴더 안에는 yaml과 db3 파일 생성됨
+       -폴더 자체가 bag 파일임
 
 </pre>
