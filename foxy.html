@@ -153,35 +153,36 @@
             ros2 run cpp_pubsub listener
 
       * 간단한 publisher와 subscriber 생성(python)
-      *Create a package
-      1. CMAKE package 또는 python package(ros2_ws/src에서)
-         ros2 pkg create --build-type ament_python py_pubsub   
-      2. publisher node 생성(ros2_ws/src/py_pubsub/py_pubsub)
-         wget https://raw.githubusercontent.com/ros2/examples/foxy/rclpy/topics/minimal_publisher/examples_rclpy_minimal_publisher/publisher_member_function.py
-      3. dependency 추가(ros2_ws/src/py_pubsub)
-         ~ package.xml에서 <description>, <maintainer>, <license> 수정, <exec_depend>rclpy</exec_depend>, <exec_depend>std_msgs</exec_depend> 추가
-      4. entry point 추가
-         ~ setup.py 수정       
-         ~ package.xml의 maintainer, maintainer_email, description, license 일치시킴
-         ~ 'talker = py_pubsub.publisher_member_function:main'를 entry_points의 console_scripts에 추가  
-      5. setup.cfg 확인
-         ~ 실행파일 위치: $base/lib               
-      6. subscriber node 생성(ros2_ws/src/py_pubsub/py_pubsub)
-         wget https://raw.githubusercontent.com/ros2/examples/foxy/rclpy/topics/minimal_subscriber/examples_rclpy_minimal_subscriber/subscriber_member_function.py
-      7. entry point 추가
-         ~ setup.py 수정        
-         ~ 'listener = py_pubsub.subscriber_member_function:main',        
-      8. build and run(ros2_ws에서)
-         ~ dependency check
-           rosdep install -i --from-path src --rosdistro foxy -y
-         ~ build 
-           colcon build --packages-select py_pubsub
-      9. source the setup file in a new terminal(ros2_ws에서)
-         . install/setup.bash
-      10. run the talker
-         ros2 run py_pubsub talker
-      11. 새로운 터미널에서 lisener 실행(ros2_ws에서)
-         . install/setup.bash           
-         ros2 run py_pubsub listener      
-
+         *Create a package
+         1. CMAKE package 또는 python package(ros2_ws/src에서)
+            ros2 pkg create --build-type ament_python py_pubsub   
+         2. publisher node 생성(ros2_ws/src/py_pubsub/py_pubsub)
+            wget https://raw.githubusercontent.com/ros2/examples/foxy/rclpy/topics/minimal_publisher/examples_rclpy_minimal_publisher/publisher_member_function.py
+         3. dependency 추가(ros2_ws/src/py_pubsub)
+            ~ package.xml에서 <description>, <maintainer>, <license> 수정, <exec_depend>rclpy</exec_depend>, <exec_depend>std_msgs</exec_depend> 추가
+         4. entry point 추가
+            ~ setup.py 수정       
+            ~ package.xml의 maintainer, maintainer_email, description, license 일치시킴
+            ~ 'talker = py_pubsub.publisher_member_function:main'를 entry_points의 console_scripts에 추가  
+         5. setup.cfg 확인
+            ~ 실행파일 위치: $base/lib               
+         6. subscriber node 생성(ros2_ws/src/py_pubsub/py_pubsub)
+            wget https://raw.githubusercontent.com/ros2/examples/foxy/rclpy/topics/minimal_subscriber/examples_rclpy_minimal_subscriber/subscriber_member_function.py
+         7. entry point 추가
+            ~ setup.py 수정        
+            ~ 'listener = py_pubsub.subscriber_member_function:main',        
+         8. build and run(ros2_ws에서)
+            ~ dependency check
+            rosdep install -i --from-path src --rosdistro foxy -y
+            ~ build 
+            colcon build --packages-select py_pubsub
+         9. source the setup file in a new terminal(ros2_ws에서)
+            . install/setup.bash
+         10. run the talker
+            ros2 run py_pubsub talker
+         11. 새로운 터미널에서 lisener 실행(ros2_ws에서)
+            . install/setup.bash           
+            ros2 run py_pubsub listener      
+         
+      * 간단한 service와 client 생성(C++)
 </pre>
