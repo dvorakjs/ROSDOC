@@ -4,17 +4,74 @@
 -.srv file: request, response에 대하 구조 결정
 
 
-1. package 생성
+1. package 생성(C++)
     <A>ros2_ws(workspace)/src에서
         ros2 pkg create --build-type ament_cmake cpp_srvcli --dependencies rclcpp example_interfaces
         ~cpp_srvcli 패키지 생성됨
         ~rclcpp와 example_interfaces가 dependecy로 추가됨
     <B>package.xml 수정
-    <C>ros2_ws/src/cpp_srvcli에서 add_two_ints_server.cpp 생성
+    --- sever 생성 ---
+    <C>ros2_ws/src/cpp_srvcli/src에서 add_two_ints_server.cpp 생성
     <D>executable을 CMakeLists.txt에 추가
+        add_executable(server src/add_two_ints_server.cpp)
+        ament_target_dependencies(server rclcpp example_interfaces)
+    <E>다음 코드를 ament_package() 위에 추가
+        install(TARGETS
+                server
+                DESTINATION lib/${PROJECT_NAME}) 
+    --- client 생성 ---
+    <F>ros2_ws/src/cpp_srvcli/src에서 add_two_ints_client.cpp 생성
+    <G>executabler과 target을 CMakeLists.txt에 추가
+        add_executable(client src/add_two_ints_client.cpp)
+        ament_target_dependencies(client rclcpp example_interfaces) 
 
+        install(TARGETS
+        server
+        client
+        DESTINATION lib/${PROJECT_NAME})   
+    <H>Build(ros2_ws에서) 와 실행       
+        rosdep install -i --from-path src --rosdistro foxy -y
+        ~dependecy 확인
+        colcon build --packages-select cpp_srvcli
+        ~build        
+        source install/setup.bash
+        ros2 run cpp_srvcli server
+        ~새 터미널 열고 ros2_ws에서
+        source install/setup.bash
+        ros2 run cpp_srvcli client 2 3 
+        ~새 터미널 열고 ros2_ws에서
 
-
+    
+2. package 생성(Python)
+    <A>ros2_ws(workspace)/src에서
+        ros2 pkg create --build-type ament_python py_srvcli --dependencies rclpy example_interfaces
+        ~py_srvcli 패키지 생성됨
+        ~rclpy와 example_interfaces가 dependecy로 추가됨
+        <B>package.xml 수정
+        --- sever 생성 ---
+        <C>ros2_ws/src/py_srvcli/py_srvcli에서 add_two_ints_server.py 생성            
+        <D>entry point 추가
+            'service = py_srvcli.service_member_function:main',
+            ~setup.py(ros2_ws/src/py_srvcli)에 'console_scripts' 사이에
+        
+        --- client 생성 ---
+        <F>ros2_ws/src/py_srvcli/py_srvcli 에서 client_member_function.py 생성
+        <G>entry point 추가
+            'client = py_srvcli.client_member_function:main',
+            
+        <H>Build(ros2_ws에서) 와 실행       
+            rosdep install -i --from-path src --rosdistro foxy -y
+            ~dependecy 확인
+            colcon build --packages-select py_srvcli
+            ~build        
+            source install/setup.bash
+            ros2 run py_srvcli server
+            ~새 터미널 열고 ros2_ws에서
+            source install/setup.bash
+            ros2 run py_srvcli client 2 3 
+            ~새 터미널 열고 ros2_ws에서
+    
+   
 
 
 
