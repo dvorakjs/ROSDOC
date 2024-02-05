@@ -1,0 +1,35 @@
+<pre>
+    *Create a package
+    1. CMAKE package 또는 python package
+     ~ CMAKE
+       my_package/
+          CMakeLists.txt
+          include/my_package/
+          package.xml
+          src/
+
+     ~ Python      
+       my_package/
+          package.xml
+          resource/my_package
+          setup.cfg
+          setup.py
+          my_package/
+    - 하나의 workspace에 타입 다른 package 생성 가능
+     ~ workspace의 서브폴더로 "src" 생성
+       1. cd ~/ros2_ws/src
+       2-1. ros2 pkg create --build-type ament_cmake <package_name>(CMAKE)
+            ros2 pkg create --build-type ament_python <package_name>(Python)
+
+       2-2. --node-name 추가
+            ros2 pkg create --build-type ament_cmake --node-name my_node my_package(CMAKE)
+            ros2 pkg create --build-type ament_python --node-name my_node my_package(Python)
+            
+    2. colcon을 사용하여 한꺼번에 package 생성
+     cd ~/ros2_ws
+     colcon build 
+    3. Source the setup file
+      ~ source install/local_setup.bash      
+
+
+</pre>

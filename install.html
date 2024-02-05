@@ -1,0 +1,41 @@
+<pre>
+*설치
+-Ubuntu 20.04
+-https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
+
+*환경설정
+-https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html
+-source /opt/ros/foxy/setup.bash
+-echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+   source 명령어는 스크립트 파일 수정 후에 수정된 값을 바로 적용하기 위해 사용
+   ~/bashrc 파일은 유저가 로그인할 때마다 읽어들이는 파일
+
+*Domain ID
+-export ROS_DOMAIN_ID=<your_domain_id>
+-echo "export ROS_DOMAIN_ID=<your_domain_id>" >> ~/.bashrc
+-ROS2는 통신을 위해 middleware로 DDS사용 
+-Domain ID는 DDS에서 물리적 네트워크를 공유하는 서로 다른 논리적 네트워크에 대한 매커니즘
+-서로 통신하는 노드 그룹은 같은 Domain ID 사용
+-모든 노드들은 Domain ID을 기본 0을 사용
+
+*LOCALHOST_ONLY 
+export ROS_LOCALHOST_ONLY=1
+echo "export ROS_LOCALHOST_ONLY=1" >> ~/.bashrc
+통신을 localhost에 한정시킴
+
+*turtlesim
+Simulator
+-설치: sudo apt install ros-foxy-turtlesim      
+-설치확인: ros2 pkg executables turtlesim
+-실행: ros2 run turtlesim turtlesim_node
+-제어노드 실행: ros2 run turtlesim turtle_teleop_key
+
+*rqt
+GUI 툴
+-설치: sudo apt install ~nros-foxy-rqt*
+
+*Remapping
+-turtle1 노드의 turtle1/cmd_vel 토픽에 turtle2의 turtle2/cmd_vel 할당
+-turtle_teleop_key 명령어 윈도우에서 turtle2 제어 가능
+-ros2 run turtlesim turtle_teleop_key --ros-args --remap turtle1/cmd_vel:=turtle2/cmd_vel
+</pre>
