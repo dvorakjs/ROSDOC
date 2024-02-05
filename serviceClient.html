@@ -5,12 +5,14 @@
 
 
 1. package 생성
--ros2_ws(workspace)/src에서
-    ros2 pkg create --build-type ament_cmake cpp_srvcli --dependencies rclcpp example_interfaces
-    ~cpp_srvcli 패키지 생성됨
-    ~rclcpp와 example_interfaces가 dependecy로 추가됨
--package.xml 수정
--ros2_ws/src/cpp_srvcli에서 add_two_ints_server.cpp 생성
+    <A>ros2_ws(workspace)/src에서
+        ros2 pkg create --build-type ament_cmake cpp_srvcli --dependencies rclcpp example_interfaces
+        ~cpp_srvcli 패키지 생성됨
+        ~rclcpp와 example_interfaces가 dependecy로 추가됨
+    <B>package.xml 수정
+    <C>ros2_ws/src/cpp_srvcli에서 add_two_ints_server.cpp 생성
+    <D>executable을 CMakeLists.txt에 추가
+
 
 
 
