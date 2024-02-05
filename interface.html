@@ -1,0 +1,67 @@
+<pre>
+    1. 새로운 package 생성
+        ros2 pkg create --build-type ament_cmake tutorial_interfaces
+    2. msg와 srv 폴더 생성
+    3. custom definition 생성
+        A>msg definition
+            1>tutorial_interfaces/msg 폴더에 Num.msg 파일 생성
+            2>int64 num 추가
+            3>tutorial_interfaces/msg 폴더에 Sphere.msg 파일 생성
+            4>geometry_msgs/Point center
+              float64 radius 추가
+        B>srv definition
+            1>tutorial_interfaces/srv 폴더에 AddThreeInts.srv 파일 생성
+            2>int64 a
+             int64 b
+             int64 c
+             ---
+             int64 sum 추가
+    4. CMakeLists.txt에 다음 추가
+        find_package(geometry_msgs REQUIRED)
+        find_package(rosidl_default_generators REQUIRED)
+        
+        rosidl_generate_interfaces(${PROJECT_NAME}
+        "msg/Num.msg"
+        "msg/Sphere.msg"
+        "srv/AddThreeInts.srv"
+        DEPENDENCIES geometry_msgs # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
+        )
+    5. package.xml에 다음 추가
+        <depend>geometry_msgs</depend>
+        <buildtool_depend>rosidl_default_generators</buildtool_depend>
+        <exec_depend>rosidl_default_runtime</exec_depend>
+        <member_of_group>rosidl_interface_packages</member_of_group>
+    6. Build
+        colcon build --packages-select tutorial_interfaces
+
+    7. 확인(새로운 터미널에서 )        
+        source install/setup.bash
+        ros2 interface show tutorial_interfaces/msg/Num
+    
+    8. 사용
+       pub/sub 파일에서 Num.msg 사용
+       CMakeLists.txt 수정
+        find_package(tutorial_interfaces REQUIRED) 추가        
+        ament_target_dependencies(talker rclcpp tutorial_interfaces) 추가
+        ament_target_dependencies(listener rclcpp tutorial_interfaces) 추가
+
+    9. package.xml 수정
+        <depend>tutorial_interfaces</depend> 추가
+
+    10. 다시 빌드
+        colcon build --packages-select cpp_srvcli
+    
+    11. 실행(각 터미널에서)
+        source install/setup.bash
+        ros2 run cpp_srvcli server
+
+        source install/setup.bash
+        ros2 run cpp_srvcli client 2 3 1
+
+
+     
+
+
+
+
+</pre>
